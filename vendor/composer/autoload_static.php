@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit27b4e5a4957d4da93e90e2a73a7c6e66
+class ComposerStaticInit48f97589b9fa66d3a4c4aedc8e984eee
 {
     public static $files = array (
         'b45b351e6b6f7487d819961fef2fda77' => __DIR__ . '/..' . '/jakeasmith/http_build_url/src/http_build_url.php',
@@ -34,6 +34,8 @@ class ComposerStaticInit27b4e5a4957d4da93e90e2a73a7c6e66
         'WPML\\TM\\ATE\\Download\\Process' => __DIR__ . '/../..' . '/classes/ATE/Download/Process.php',
         'WPML\\TM\\ATE\\Download\\Queue' => __DIR__ . '/../..' . '/classes/ATE/Download/Queue.php',
         'WPML\\TM\\ATE\\Download\\Result' => __DIR__ . '/../..' . '/classes/ATE/Download/Result.php',
+        'WPML\\TM\\ATE\\Hooks\\ReturnedJobActions' => __DIR__ . '/../..' . '/classes/ATE/Hooks/ReturnedJobActions.php',
+        'WPML\\TM\\ATE\\Hooks\\ReturnedJobActionsFactory' => __DIR__ . '/../..' . '/classes/ATE/Hooks/ReturnedJobActionsFactory.php',
         'WPML\\TM\\ATE\\JobRecord' => __DIR__ . '/../..' . '/classes/ATE/JobRecord.php',
         'WPML\\TM\\ATE\\JobRecords' => __DIR__ . '/../..' . '/classes/ATE/JobRecords.php',
         'WPML\\TM\\ATE\\Log\\Entry' => __DIR__ . '/../..' . '/classes/ATE/Log/Entry.php',
@@ -44,6 +46,7 @@ class ComposerStaticInit27b4e5a4957d4da93e90e2a73a7c6e66
         'WPML\\TM\\ATE\\Log\\ViewFactory' => __DIR__ . '/../..' . '/classes/ATE/Log/ViewFactory.php',
         'WPML\\TM\\ATE\\REST\\Download' => __DIR__ . '/../..' . '/classes/ATE/REST/Download.php',
         'WPML\\TM\\ATE\\REST\\Sync' => __DIR__ . '/../..' . '/classes/ATE/REST/Sync.php',
+        'WPML\\TM\\ATE\\ReturnedJobsQueue' => __DIR__ . '/../..' . '/classes/ATE/ReturnedJobsQueue.php',
         'WPML\\TM\\ATE\\Sync\\Arguments' => __DIR__ . '/../..' . '/classes/ATE/Sync/Arguments.php',
         'WPML\\TM\\ATE\\Sync\\Factory' => __DIR__ . '/../..' . '/classes/ATE/Sync/Factory.php',
         'WPML\\TM\\ATE\\Sync\\Process' => __DIR__ . '/../..' . '/classes/ATE/Sync/Process.php',
@@ -621,7 +624,7 @@ class ComposerStaticInit27b4e5a4957d4da93e90e2a73a7c6e66
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit27b4e5a4957d4da93e90e2a73a7c6e66::$classMap;
+            $loader->classMap = ComposerStaticInit48f97589b9fa66d3a4c4aedc8e984eee::$classMap;
 
         }, null, ClassLoader::class);
     }

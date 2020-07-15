@@ -91,7 +91,7 @@ if ( ! class_exists( 'TranslationProxy_Basket' ) ) {
 			$cache_found = false;
 
 			if ( ! $skip_cache) {
-				$basket_items_number = wp_cache_get( $cache_key, $cache_group, false, $cache_found );
+				$basket_items_number = (int) wp_cache_get( $cache_key, $cache_group, false, $cache_found );
 			} else {
 				$basket_items_number = 0;
 			}

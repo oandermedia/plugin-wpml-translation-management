@@ -678,13 +678,24 @@ class WPML_Translations_Queue {
 			}
 
 			if ( array_key_exists( 'query', $return_url_parts ) ) {
-				$admin_url_parts['query'] = $return_url_parts['query'];
+				$admin_url_parts['query'] = $this->filterQueryParameters( $return_url_parts['query'] );
 			}
 
 			$return_url = http_build_url( $admin_url_parts );
 		}
 
 		return $return_url;
+	}
+
+	private function filterQueryParameters( $query ) {
+		$parameters = [];
+		parse_str( $query, $parameters );
+
+		unset( $parameters['ate_original_id'] );
+		unset( $parameters['back'] );
+		unset( $parameters['complete'] );
+
+		return http_build_query( $parameters );
 	}
 
 	/**
