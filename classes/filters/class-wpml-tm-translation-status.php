@@ -24,7 +24,7 @@ class WPML_TM_Translation_Status {
 
 	public function filter_translation_status( $status, $trid, $target_lang_code ) {
 		/** @var WPML_TM_Element_Translations $wpml_tm_element_translations */
-		global $wpml_tm_element_translations;
+		$wpml_tm_element_translations = wpml_tm_load_element_translations();
 
 		$cache_key  = md5( $trid . $target_lang_code );
 		$found      = false;

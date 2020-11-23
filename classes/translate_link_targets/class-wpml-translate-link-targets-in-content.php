@@ -15,7 +15,7 @@ abstract class WPML_Translate_Link_Targets_In_Content extends WPML_WPDB_User {
 	/** @var  WPML_Translate_Link_Target_Global_State $translate_link_target_global_state */
 	private $translate_link_target_global_state;
 
-	const MAX_TO_FIX_FOR_NEW_CONTENT = 3;
+	const MAX_TO_FIX_FOR_NEW_CONTENT = 10;
 
 	public function __construct( WPML_Translate_Link_Target_Global_State $translate_link_target_global_state,
 		&$wpdb, 

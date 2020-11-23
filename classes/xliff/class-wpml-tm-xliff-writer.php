@@ -4,6 +4,7 @@
  */
 
 use WPML\FP\Obj;
+use WPML\FP\Str;
 
 class WPML_TM_Xliff_Writer {
 	const TAB                        = "\t";
@@ -263,7 +264,7 @@ class WPML_TM_Xliff_Writer {
 							$field_data_translated,
 							$element->translated_from_memory,
 							$element->field_wrap_tag,
-							$this->get_field_title( $element )
+							$this->get_field_title( $element, $job )
 						);
 					}
 				}
@@ -274,11 +275,12 @@ class WPML_TM_Xliff_Writer {
 
 	/**
 	 * @param \stdClass $field
+	 * @param \stdClass $job
 	 *
 	 * @return string
 	 */
-	private function get_field_title( $field ) {
-		$result = apply_filters( 'wpml_tm_adjust_translation_fields', [ (array) $field ], null );
+	private function get_field_title( $field, $job ) {
+		$result = apply_filters( 'wpml_tm_adjust_translation_fields', [ (array) $field ], $job, null );
 
 		return Obj::pathOr( '', [ 0, 'title' ], $result );
 	}
@@ -299,6 +301,10 @@ class WPML_TM_Xliff_Writer {
 			if ( preg_match( '/^package-string/', $element->field_type ) ) {
 				$strings_to_translate[ $element->tid ] = base64_decode( $element->field_data );
 			}
+
+			if ( $this->is_taxonomy_field( $element->field_type ) && $element->field_data != $element->field_data_translated ) {
+				$element->translated_from_memory = true;
+			}
 		}
 
 		$original_translated_map = $this->get_original_translated_map_from_translation_memory( $strings_to_translate, $source_lang, $target_lang );
@@ -317,6 +323,12 @@ class WPML_TM_Xliff_Writer {
 		}
 
 		return $elements;
+	}
+
+	private function is_taxonomy_field( $field_type ) {
+		return Str::startsWith( 't_', $field_type )
+		       || Str::startsWith( 'tdesc_', $field_type )
+		       || Str::startsWith( 'tfield-', $field_type );
 	}
 
 	/**
