@@ -169,7 +169,7 @@ class WPML_TM_ATE_Jobs {
 		// $getTargetLangIfEntityExists :: \WPML_TM_Job_Entity|false -> string|null
 		$getTargetLangIfEntityExists = Logic::ifElse( Fns::identity(), invoke( 'get_target_language' ), Fns::always( null ) );
 
-		return pipe( Obj::prop( 'job_id' ), $getJobEntityById, $getTargetLangIfEntityExists );
+		return pipe( Obj::prop( 'rid' ), $getJobEntityById, $getTargetLangIfEntityExists );
 	}
 
 	/**

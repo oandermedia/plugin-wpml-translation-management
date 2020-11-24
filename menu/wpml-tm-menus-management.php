@@ -1,7 +1,9 @@
 <?php
 
 use WPML\TM\Menu\TranslationBasket\Utility;
+use WPML\TM\Menu\TranslationServices\Section;
 use function WPML\Container\make;
+use WPML\TM\ATE\ClonedSites\Lock as AteApiLock;
 
 class WPML_TM_Menus_Management extends WPML_TM_Menus {
 
@@ -55,6 +57,7 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 	}
 
 	protected function render_main() {
+		if ( ! AteApiLock::isLocked() ) {
 		?>
 		<div class="wrap">
 			<h1><?php echo esc_html__( 'Translation Management', 'wpml-translation-management' ); ?></h1>
@@ -89,6 +92,7 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 			?>
 		</div>
 		<?php
+        }
 	}
 
 	/**
@@ -221,14 +225,11 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 					'status'               => FILTER_SANITIZE_STRING,
 					'translation_priority' => FILTER_SANITIZE_NUMBER_INT,
 					'title'                => FILTER_SANITIZE_STRING,
+					'sort_by'              => FILTER_SANITIZE_STRING,
+					'sort_order'           => FILTER_SANITIZE_STRING,
 				)
 			);
 		}
-
-		$this->translation_filter['sort_by']    = isset( $_SESSION['wp-translation_dashboard_filter']['sort_by'] ) ?
-			$_SESSION['wp-translation_dashboard_filter']['sort_by'] : null;
-		$this->translation_filter['sort_order'] = isset( $_SESSION['wp-translation_dashboard_filter']['sort_order'] ) ?
-			$_SESSION['wp-translation_dashboard_filter']['sort_order'] : null;
 
 		if ( $this->source_language || ! isset( $this->translation_filter['from_lang'] ) ) {
 			if ( $this->source_language ) {
@@ -1029,7 +1030,7 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 	 * @return string
 	 */
 	private function get_translation_services_link( $text ) {
-		return $this->get_tm_menu_link( WPML_TM_Translation_Services_Admin_Section::SLUG, $text );
+		return $this->get_tm_menu_link( Section::SLUG, $text );
 	}
 
 	private function get_tm_menu_link( $section, $text ) {
